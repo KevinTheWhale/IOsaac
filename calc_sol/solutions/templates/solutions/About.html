@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - IOsaac</title>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        .top-section {
+            width: 100%;
+            height: 20vh;
+            background-color: #86d3ad; 
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 80px;
+            font-weight: 900;
+            color: #eff5f2;
+            text-shadow: -3px -3px 0 #4b7f63, 3px -3px 0 #4b7f63, -3px 3px 0 #4b7f63, 3px 3px 0 #4b7f63;
+            text-decoration: none;
+            letter-spacing: 5px;
+            margin-right: 50px;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-button {
+            background-color: #86d3ad;
+            color: #4b7f63;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: 2px solid #86d3ad;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .nav-button:hover {
+            background-color: #cbf3de;
+            transform: scale(1.05);
+        }
+
+        /* Upload Button Styling */
+        .upload-button {
+            position: absolute;      /* Stays within the top-section */
+            right: 100px;              /* Stays on the far right */
+            top: 50%;                 /* Vertically centered within the top-section */
+            transform: translateY(-50%);
+            background-color: #63a984;
+            color: #eff5f2;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .upload-button:hover {
+            background-color: #cbf3de;
+        }
+
+        .divider-line {
+            width: 100%;
+            height: 6px;
+            background-color: #63a984;
+            margin: 0;
+            border: none;
+        }
+
+        .about-heading {
+            position: fixed;
+            top: 26vh;
+            left: 290px;
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+            background-color: #f9f9f9;
+            padding: 5px 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+        }
+
+        .content-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 80px auto;
+            width: 80%;
+            max-width: 1200px;
+            position: relative;
+        }
+
+        .content-section {
+            width: 100%;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f9f9f992;
+            border-radius: 12px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-text {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .ad-space {
+            width: 10%;
+            height: 300px;
+            border: 2px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            background-color: #f1f1f1;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Section with Navigation -->
+    <div class="top-section">
+        <div>
+            <a href="/" class="logo">Φsaac</a>
+        </div>
+        <div class="button-container">
+            <a href="/" class="nav-button">Home</a>
+            <a href="{% url 'chapter_list' %}" class="nav-button">Solutions</a>
+            <a href="/resources" class="nav-button">Resources</a>
+            <a href="/about" class="nav-button">About</a>
+            <a href="/feedback" class="nav-button">Feedback</a>
+        </div>
+
+        <!-- Dedicated Upload Button -->
+        <a href="/upload" class="upload-button">UPLOAD</a>
+    </div>
+
+    <!-- Divider Line -->
+    <div class="divider-line"></div>
+
+    <!-- Fixed About Heading -->
+    <div class="about-heading">About</div>
+
+    <!-- Content Wrapper -->
+    <div class="content-wrapper">
+        <div class="ad-space">Ad Space</div>
+        <div class="content-section">
+            {% if about %}
+                <div class="content-text">{{ about.content|linebreaks }}</div>
+            {% else %}
+                <div class="content-text">No About content available yet.</div>
+            {% endif %}
+        </div>
+        <div class="ad-space">Ad Space</div>
+    </div>
+</body>
+</html>

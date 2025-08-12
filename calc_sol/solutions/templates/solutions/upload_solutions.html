@@ -1,0 +1,12 @@
+{% extends 'solutions/base.html' %}
+{% block title %}Upload Solution - Calculus Solutions{% endblock %}
+
+{% block content %}
+<h1>Upload Solution for Problem {{ problem.problem_number }}</h1>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<p>Your solution will be reviewed before it appears on the site.</p>
+{% endblock %}

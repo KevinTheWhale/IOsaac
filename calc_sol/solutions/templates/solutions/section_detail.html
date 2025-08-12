@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IOsaac - Section Detail</title>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+        .top-section {
+            width: 100%;
+            height: 20vh;
+            background-color: #86d3ad; /* Seafoam green */
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .logo {
+            font-size: 80px; /* Increased size for higher definition */
+            font-weight: 900; /* Extra bold for sharp definition */
+            color: #eff5f2;
+            text-shadow: -3px -3px 0 #4b7f63, 3px -3px 0 #4b7f63, -3px 3px 0 #4b7f63, 3px 3px 0 #4b7f63;
+            text-decoration: none;
+            letter-spacing: 5px; /* More spacing for readability */
+            font-smooth: always;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            margin-right: 50px; /* Pushes the buttons to the right of the logo*/
+        }
+        .logo:visited, .logo:active, .logo:hover, .logo:link {
+            text-decoration: none;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-button {
+            background-color: #86d3ad; /* Seafoam green */
+            color: #4b7f63;
+            font-size: 24px; /* 30% of logo size */
+            font-weight: bold;
+            padding: 10px 20px;
+            border: 2px solid #86d3ad;
+            border-radius: 12px; /* Curved corners */
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+        .nav-button:hover {
+            background-color: #cbf3de; /* Slightly darker seafoam green on hover */
+            transform: scale(1.05);
+        }
+        
+        /* Upload Button Styling */
+        .upload-button {
+            position: absolute;      /* Stays within the top-section */
+            right: 100px;              /* Stays on the far right */
+            top: 50%;                 /* Vertically centered within the top-section */
+            transform: translateY(-50%);
+            background-color: #63a984;
+            color: #eff5f2;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .upload-button:hover {
+            background-color: #cbf3de;
+        }
+
+        .content-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 40px auto;
+            width: 80%;
+        }
+
+        .content-section {
+            width: 85%;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f9f9f992;
+            border-radius: 12px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .content-title {
+            font-size: 32px; /* Slightly larger for better visibility */
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center; /* Center the title */
+        }
+        .content-text {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .problem-list {
+            margin-top: 30px;
+        }
+        .problem-item {
+            padding: 10px;
+            background-color: #e9f5f1;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .ad-space {
+            width: 15%;
+            height: 300px;
+            border: 2px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            background-color: #f1f1f1;
+            margin: 0;
+        }
+
+        /* Divider Line Styling */
+        .divider-line {
+            width: 100%;
+            height: 6px;  /* Thickness of the line */
+            background-color: #63a984;  /* A nice blue color, but you can change this */
+            margin: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-section">
+        <div style="display: flex; flex-direction: column; align-items: flex-start;">
+            <a href="/" class="logo">Φsaac</a>
+        </div>
+        <div class="button-container">
+            <a href="/" class="nav-button">Home</a>  <!-- New Home Button -->
+            <a href="{% url 'chapter_list' %}" class="nav-button">Solutions</a>
+            <a href="/resources" class="nav-button">Resources</a>
+            <a href="/about" class="nav-button">About</a>
+            <a href="/feedback" class="nav-button">Feedback</a>
+        </div>
+
+        <!-- Dedicated Upload Button -->
+        <a href="/upload" class="upload-button">UPLOAD</a>
+    </div>
+
+    <!-- Divider Line -->
+    <div class = "divider-line"></div>
+
+    <div class="content-wrapper">
+        <div class="ad-space">Ad Space</div>
+        <div class="content-section">
+            <div class="content-title">{{ section.title }}</div>
+            <div class="content-text">
+                <p>{{ section.content }}</p>  <!-- Displaying section content -->
+            </div>
+
+            <div class="problem-list">
+                <h3>Questions</h3>
+                {% for problem in section.problems.all %}
+                    <div class="problem-item">
+                        <a href="{% url 'problem_detail' problem.id %}" class="nav-button">
+                            Question {{ problem.number }}: {{ problem.description }}
+                        </a>
+                    </div>
+                {% empty %}
+                    <p>No questions available for this section.</p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="ad-space">Ad Space</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{% extends 'solutions/base.html' %}
+{% block title %}Chapter {{ chapter.number }} - Sections{% endblock %}
+
+{% block content %}
+<h1>Sections in Chapter {{ chapter.number }}: {{ chapter.title }}</h1>
+<ul class="list-group mt-3">
+    {% for section in sections %}
+        <li class="list-group-item">
+            <a href="{% url 'section_detail' chapter.id section.id %}">{{ section.number }} - {{ section.title }}</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
